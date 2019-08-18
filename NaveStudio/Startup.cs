@@ -13,7 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace NaveStudio
 {
-    public class Startup
+    public partial class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -42,6 +42,7 @@ namespace NaveStudio
 
             services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connectionString));
 
+            services.AddTransient<IDataService, DataService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,32 +69,10 @@ namespace NaveStudio
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Api}/{action=Index}/{id?}");
             });
 
-            serviceProvider.GetService<ApplicationContext>().Database.Migrate();
-        }
-
-
-
-        class DataService
-        {
-            private readonly ApplicationContext contexto;
-
-            public DataService(ApplicationContext context)
-            {
-                this.contexto = context;
-            }
-
-            //public void Gravar()
-            //{
-            //    Produto p = new Produto("1", "Gravação", 100);
-
-            //    contexto.Set<Produto>().Add(p);
-            //    contexto.SaveChanges();
-            //}
-
-
+            serviceProvider.GetService<IDataService>().InicializaDb();
         }
     }
 }

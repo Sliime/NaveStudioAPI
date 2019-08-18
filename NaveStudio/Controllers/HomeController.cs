@@ -27,16 +27,7 @@ namespace NaveStudio.Controllers
             
             
         }
-        [HttpGet]
-        public IActionResult GetProdutos()
-        {
-            var but =_context.Set<Produto>().ToList();
-            
-            
-
-            return Json(but.ToList());
-
-        }
+        
 
         public IActionResult Index()
         {

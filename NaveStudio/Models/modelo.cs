@@ -48,12 +48,12 @@ namespace NaveStudio.Models
             Cadastro = new Cadastro();
         }
 
-        public HorarioPedido(Produto produto, DateTime horaEntrada, DateTime horaSaida, int quantidadeHora, decimal precoTotal, Cadastro cadastro)
+        public HorarioPedido(Produto produto, DateTime horaEntrada, int quantidadeHora, decimal precoTotal, Cadastro cadastro)
         {
             Produto = produto;
             this.horaEntrada = horaEntrada;
             this.horaSaida = horaSaida;
-            QuantidadeHora = quantidadeHora;
+            
             PrecoTotal = precoTotal;
             Cadastro = cadastro;
         }
