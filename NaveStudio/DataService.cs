@@ -25,6 +25,7 @@ namespace NaveStudio
                 Produto p = new Produto("1", "Gravação", 100);
                 Produto pe = new Produto("2", "Ensaio", 50);
 
+
                 contexto.Set<Produto>().AddRange(p, pe);
                 contexto.SaveChanges();
             }

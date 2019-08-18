@@ -37,67 +37,30 @@ namespace NaveStudio.Models
             this.Nome = nome;
             this.Preco = preco;
         }
+
+
+
     }
 
-    public class HorarioPedido : BaseModel
+    public class CadastroHorario : BaseModel
     {
-
-
-        public HorarioPedido()
+        public CadastroHorario(string email, DateTime horaEntrada, DateTime horaSaida, Produto produto)
         {
-            Cadastro = new Cadastro();
-        }
-
-        public HorarioPedido(Produto produto, DateTime horaEntrada, int quantidadeHora, decimal precoTotal, Cadastro cadastro)
-        {
-            Produto = produto;
+            this.email = email;
             this.horaEntrada = horaEntrada;
             this.horaSaida = horaSaida;
-            
-            PrecoTotal = precoTotal;
-            Cadastro = cadastro;
+            Produto = produto;
         }
 
-        [Required]
-
-        public Cadastro Cadastro { get; set; }
-
-        [Required]
+        public string email { get; set; }
+        public DateTime horaEntrada {get; set;}
+        public DateTime horaSaida { get; set; }
         public Produto Produto { get; private set; }
 
-        [Required]
-        public DateTime horaEntrada { get; private set; }
 
-        [Required]
-        public DateTime horaSaida { get; private set; }
 
-        [Required]
-        public int QuantidadeHora { get; private set; }
-
-        [Required]
-        public decimal PrecoTotal { get; private set; }
     }
-
-    public class Cadastro : BaseModel
-    {
-        public Cadastro()
-        {
-        }
-
-       [Required]
-       public HorarioPedido HorarioPedido { get; internal set; }
-
-        [Required]
-        public string Nome { get; set; } = "";
-        [Required]
-        public string email { get; set; } = "";
-        [Required]
-        public string bandaNome { get; set; } = "";
-        [Required]
-        public string Celular { get; set; } = "";
-
-        public int horarioPedidoReferencia { get; set; }
-    }
+    
 
 
 }

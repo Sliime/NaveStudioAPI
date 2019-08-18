@@ -24,13 +24,7 @@ namespace NaveStudio
             modelBuilder.Entity<Produto>().HasKey(t => t.Id);
 
 
-            modelBuilder.Entity<HorarioPedido>().HasKey(t => t.Id);
-            modelBuilder.Entity<HorarioPedido>().HasOne(t => t.Produto);
-            modelBuilder.Entity<HorarioPedido>().HasOne(t => t.Cadastro).WithOne(c => c.HorarioPedido).HasForeignKey<Cadastro>(t => t.horarioPedidoReferencia);
-
-
-            modelBuilder.Entity<Cadastro>().HasKey(t => t.Id);
-            modelBuilder.Entity<Cadastro>().HasOne(t => t.HorarioPedido);
+            
 
 
 

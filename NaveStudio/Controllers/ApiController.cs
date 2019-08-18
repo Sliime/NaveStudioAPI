@@ -31,9 +31,15 @@ namespace NaveStudio.Controllers
 
         }
 
-        public IActionResult Incluir(HorarioPedido model)
+        [HttpPost]
+        public IActionResult Incluir(CadastroHorario model)
         {
+            if (ModelState.IsValid)
+            {
+                _context.Set<CadastroHorario>().Add(model);
+            }
 
+            return NotFound();
         }
     }
 }
