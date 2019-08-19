@@ -44,20 +44,20 @@ namespace NaveStudio.Models
 
     public class CadastroHorario : BaseModel
     {
-        public CadastroHorario(string email, DateTime horaEntrada, DateTime horaSaida, Produto produto)
-        {
-            this.email = email;
-            this.horaEntrada = horaEntrada;
-            this.horaSaida = horaSaida;
-            Produto = produto;
-        }
 
+
+        [Required]
         public string email { get; set; }
+        [Required]
         public DateTime horaEntrada {get; set;}
+        [Required]
         public DateTime horaSaida { get; set; }
-        public Produto Produto { get; private set; }
+       
 
 
+
+        public int ProdutoId { get; set; }
+        public virtual Produto Produto { get; set; }
 
     }
     

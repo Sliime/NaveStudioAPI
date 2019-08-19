@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace NaveStudio.Controllers
 {
     public class ApiController : Controller
@@ -37,9 +38,29 @@ namespace NaveStudio.Controllers
             if (ModelState.IsValid)
             {
                 _context.Set<CadastroHorario>().Add(model);
+                _context.SaveChanges();
+                return Ok();
             }
 
             return NotFound();
         }
+
+        [HttpGet]
+        public IActionResult GetCadastros()
+        {
+            var repoCadastro= _context.Set<CadastroHorario>().ToList();
+            
+            
+
+            if (repoCadastro.Count == 0)
+            {
+                return NotFound();
+            }
+
+
+            return Json(repoCadastro.ToList());
+
+        }
+
     }
 }

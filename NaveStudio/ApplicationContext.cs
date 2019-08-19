@@ -15,7 +15,7 @@ namespace NaveStudio
         }
 
        
-
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,13 +23,12 @@ namespace NaveStudio
 
             modelBuilder.Entity<Produto>().HasKey(t => t.Id);
 
+            modelBuilder.Entity<CadastroHorario>().HasKey(t => t.Id);
+
 
             
 
-
-
-
-        }
-
+    }
+        public DbSet<CadastroHorario> Compras { get; set; }
     }
 }

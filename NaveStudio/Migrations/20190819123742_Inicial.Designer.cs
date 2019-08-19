@@ -10,8 +10,8 @@ using NaveStudio;
 namespace NaveStudio.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20190817185331_Modelo")]
-    partial class Modelo
+    [Migration("20190819123742_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,45 +21,16 @@ namespace NaveStudio.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("NaveStudio.Models.Cadastro", b =>
+            modelBuilder.Entity("NaveStudio.Models.CadastroHorario", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Celular")
-                        .IsRequired();
-
-                    b.Property<string>("Nome")
-                        .IsRequired();
-
-                    b.Property<string>("bandaNome")
-                        .IsRequired();
-
-                    b.Property<string>("email")
-                        .IsRequired();
-
-                    b.Property<int>("horarioPedidoReferencia");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("horarioPedidoReferencia")
-                        .IsUnique();
-
-                    b.ToTable("Cadastro");
-                });
-
-            modelBuilder.Entity("NaveStudio.Models.HorarioPedido", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<decimal>("PrecoTotal");
 
                     b.Property<int>("ProdutoId");
 
-                    b.Property<int>("QuantidadeHora");
+                    b.Property<string>("email")
+                        .IsRequired();
 
                     b.Property<DateTime>("horaEntrada");
 
@@ -69,7 +40,7 @@ namespace NaveStudio.Migrations
 
                     b.HasIndex("ProdutoId");
 
-                    b.ToTable("HorarioPedido");
+                    b.ToTable("Compras");
                 });
 
             modelBuilder.Entity("NaveStudio.Models.Produto", b =>
@@ -91,15 +62,7 @@ namespace NaveStudio.Migrations
                     b.ToTable("Produto");
                 });
 
-            modelBuilder.Entity("NaveStudio.Models.Cadastro", b =>
-                {
-                    b.HasOne("NaveStudio.Models.HorarioPedido", "HorarioPedido")
-                        .WithOne("Cadastro")
-                        .HasForeignKey("NaveStudio.Models.Cadastro", "horarioPedidoReferencia")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("NaveStudio.Models.HorarioPedido", b =>
+            modelBuilder.Entity("NaveStudio.Models.CadastroHorario", b =>
                 {
                     b.HasOne("NaveStudio.Models.Produto", "Produto")
                         .WithMany()
