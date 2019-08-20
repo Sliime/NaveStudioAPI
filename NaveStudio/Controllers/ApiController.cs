@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NaveStudio.Models;
 using System;
 using System.Collections.Generic;
@@ -37,29 +38,43 @@ namespace NaveStudio.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Set<CadastroHorario>().Add(model);
-                _context.SaveChanges();
-                return Ok();
+                IList<CadastroHorario> produtos = _context.Compras
+                       .Where(c => model.horaEntrada <= c.horaSaida && model.horaSaida >= c.horaEntrada).ToList();
+                if (produtos.Count == 0)
+                {
+                    _context.Compras.Add(model);
+                    _context.SaveChanges();
+                    return Ok();
+                }
+
+                return NotFound();
             }
 
             return NotFound();
         }
 
         [HttpGet]
-        public IActionResult GetCadastros()
+        public IActionResult GetCadastros(DateTime time)
         {
-            var repoCadastro= _context.Set<CadastroHorario>().ToList();
-            
-            
-
-            if (repoCadastro.Count == 0)
+            if (time < DateTime.Now)
             {
                 return NotFound();
+
             }
 
+            else {
+                var repoCadastro = _context.Set<CadastroHorario>().ToList();
 
-            return Json(repoCadastro.ToList());
 
+                var horaFiltrada = _context.Compras.Where(p => p.horaEntrada >= time).Include(p => p.Produto).ToList();
+
+                if (horaFiltrada.Count == 0)
+                {
+                    return NotFound();
+                }
+
+                return Json(horaFiltrada.ToList());
+            }
         }
 
     }
