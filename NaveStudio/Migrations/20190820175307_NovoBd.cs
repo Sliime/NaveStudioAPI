@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NaveStudio.Migrations
 {
-    public partial class Inicial : Migration
+    public partial class NovoBd : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,9 +29,11 @@ namespace NaveStudio.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    email = table.Column<string>(nullable: false),
-                    horaEntrada = table.Column<DateTime>(nullable: false),
-                    horaSaida = table.Column<DateTime>(nullable: false),
+                    Nome = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(nullable: false),
+                    NumeroCelular = table.Column<string>(nullable: false),
+                    HoraEntrada = table.Column<DateTime>(nullable: false),
+                    HoraSaida = table.Column<DateTime>(nullable: false),
                     ProdutoId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

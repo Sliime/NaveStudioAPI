@@ -39,7 +39,6 @@ namespace NaveStudio.Models
         }
 
 
-
     }
 
     public class CadastroHorario : BaseModel
@@ -47,11 +46,19 @@ namespace NaveStudio.Models
 
 
         [Required]
-        public string email { get; set; }
+        public string Nome { get; set; }
+
         [Required]
-        public DateTime horaEntrada {get; set;}
+        public string Email { get; set; }
+
         [Required]
-        public DateTime horaSaida { get; set; }
+        public string NumeroCelular { get; set; }
+
+        [Required]
+        public DateTime HoraEntrada {get; set;}
+
+        [Required]
+        public DateTime HoraSaida { get; set; }
        
 
 

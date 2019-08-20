@@ -39,7 +39,7 @@ namespace NaveStudio.Controllers
             if (ModelState.IsValid)
             {
                 IList<CadastroHorario> produtos = _context.Compras
-                       .Where(c => model.horaEntrada <= c.horaSaida && model.horaSaida >= c.horaEntrada).ToList();
+                       .Where(c => model.HoraEntrada <= c.HoraSaida && model.HoraSaida >= c.HoraEntrada).ToList();
                 if (produtos.Count == 0)
                 {
                     _context.Compras.Add(model);
@@ -47,7 +47,7 @@ namespace NaveStudio.Controllers
                     return Ok();
                 }
 
-                return NotFound();
+                return BadRequest();
             }
 
             return NotFound();
@@ -58,7 +58,7 @@ namespace NaveStudio.Controllers
         {
             if (time < DateTime.Now)
             {
-                return NotFound();
+                return BadRequest();
 
             }
 
@@ -66,11 +66,11 @@ namespace NaveStudio.Controllers
                 var repoCadastro = _context.Set<CadastroHorario>().ToList();
 
 
-                var horaFiltrada = _context.Compras.Where(p => p.horaEntrada >= time).Include(p => p.Produto).ToList();
+                var horaFiltrada = _context.Compras.Where(p => p.HoraEntrada >= time).Include(p => p.Produto).ToList();
 
                 if (horaFiltrada.Count == 0)
                 {
-                    return NotFound();
+                    return BadRequest();
                 }
 
                 return Json(horaFiltrada.ToList());
