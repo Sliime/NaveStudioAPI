@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 
 namespace NaveStudio.Controllers
 {
-    public class ApiController : Controller
+    [ApiController]
+    [Route("[controller]")]
+    public class ApiController : ControllerBase
     {
         private readonly ApplicationContext _context;
 
@@ -18,20 +20,20 @@ namespace NaveStudio.Controllers
             _context = context;
         }
 
-        [HttpGet]
-        public IActionResult GetProdutos()
-        {
-            var repoProduto = _context.Set<Produto>().ToList();
+        //[HttpGet]
+        //public IActionResult GetProdutos()
+        //{
+        //    var repoProduto = _context.Set<Produto>().ToList();
 
-            if (repoProduto.Count == 0)
-            {
-                return NotFound();
-            }
+        //    if (repoProduto.Count == 0)
+        //    {
+        //        return NotFound();
+        //    }
 
 
-            return Json(repoProduto.ToList());
+        //    return Ok(repoProduto.ToList());
 
-        }
+        //}
 
         [HttpPost]
         public IActionResult Incluir(CadastroHorario model)
@@ -73,7 +75,7 @@ namespace NaveStudio.Controllers
                     return BadRequest();
                 }
 
-                return Json(horaFiltrada.ToList());
+                return Ok(horaFiltrada.ToList());
             }
         }
 
