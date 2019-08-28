@@ -20,7 +20,7 @@ namespace NaveStudio.Controllers
             _context = context;
         }
 
-        //[HttpGet]
+        
         //public IActionResult GetProdutos()
         //{
         //    var repoProduto = _context.Set<Produto>().ToList();
@@ -36,7 +36,7 @@ namespace NaveStudio.Controllers
         //}
 
         [HttpPost]
-        public IActionResult Incluir(CadastroHorario model)
+        public IActionResult Incluir([FromBody]CadastroHorario model)
         {
             if (ModelState.IsValid)
             {
@@ -49,7 +49,7 @@ namespace NaveStudio.Controllers
                     return Ok();
                 }
 
-                return BadRequest();
+                return BadRequest("Horario ocupado");
             }
 
             return NotFound();
@@ -72,7 +72,7 @@ namespace NaveStudio.Controllers
 
                 if (horaFiltrada.Count == 0)
                 {
-                    return BadRequest();
+                    return BadRequest("Tem nada");
                 }
 
                 return Ok(horaFiltrada.ToList());

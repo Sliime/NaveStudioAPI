@@ -10,8 +10,8 @@ using NaveStudio;
 namespace NaveStudio.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20190820175307_NovoBd")]
-    partial class NovoBd
+    [Migration("20190823173301_inicial")]
+    partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
