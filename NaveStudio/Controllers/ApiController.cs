@@ -20,20 +20,20 @@ namespace NaveStudio.Controllers
             _context = context;
         }
 
-        
-        //public IActionResult GetProdutos()
-        //{
-        //    var repoProduto = _context.Set<Produto>().ToList();
+        [HttpGet]
+        public IActionResult GetProdutos()
+        {
+            var repoProduto = _context.Set<Produto>().ToList();
 
-        //    if (repoProduto.Count == 0)
-        //    {
-        //        return NotFound();
-        //    }
+            if (repoProduto.Count == 0)
+            {
+                return NotFound();
+            }
 
 
-        //    return Ok(repoProduto.ToList());
+            return Ok(repoProduto.ToList());
 
-        //}
+        }
 
         [HttpPost]
         public IActionResult Incluir([FromBody]CadastroHorario model)
@@ -55,29 +55,29 @@ namespace NaveStudio.Controllers
             return NotFound();
         }
 
-        [HttpGet]
-        public IActionResult GetCadastros(DateTime time)
-        {
-            if (time < DateTime.Now)
-            {
-                return BadRequest();
+        
+        //public IActionResult GetCadastros(DateTime time)
+        //{
+        //    if (time < DateTime.Now)
+        //    {
+        //        return BadRequest();
 
-            }
+        //    }
 
-            else {
-                var repoCadastro = _context.Set<CadastroHorario>().ToList();
+        //    else {
+        //        var repoCadastro = _context.Set<CadastroHorario>().ToList();
 
 
-                var horaFiltrada = _context.Compras.Where(p => p.HoraEntrada >= time).Include(p => p.Produto).ToList();
+        //        var horaFiltrada = _context.Compras.Where(p => p.HoraEntrada >= time).Include(p => p.Produto).ToList();
 
-                if (horaFiltrada.Count == 0)
-                {
-                    return BadRequest("Tem nada");
-                }
+        //        if (horaFiltrada.Count == 0)
+        //        {
+        //            return BadRequest("Tem nada");
+        //        }
 
-                return Ok(horaFiltrada.ToList());
-            }
-        }
+        //        return Ok(horaFiltrada.ToList());
+        //    }
+        //}
 
     }
 }
